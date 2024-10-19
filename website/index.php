@@ -13,7 +13,7 @@
     
 
     <!-- Bootstrap core CSS -->
-<link href="Website/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="/website/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -249,7 +249,7 @@
 </footer>
 
 
-    <script src="Website/assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/website/assets/dist/js/bootstrap.bundle.min.js"></script>
 
       
   </body>
