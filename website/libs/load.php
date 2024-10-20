@@ -1,5 +1,5 @@
 <?php
 function load_templates($name){
-    include __DIR__."/../_templates/$name.php";
+    include __DIR__."/../__templates/$name.php";
 }
 ?>
