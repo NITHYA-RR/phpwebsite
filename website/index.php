@@ -37,7 +37,11 @@
     
 <header>
   <div class="collapse bg-dark" id="navbarHeader">
-    <div class="container">
+  </div>
+
+  <?php load_templates('header');
+  ?>
+  <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <h4 class="text-white">About</h4>
@@ -53,7 +57,6 @@
         </div>
       </div>
     </div>
-  </div>
  </header>
 <main>
 <section class="py-5 text-center container">
