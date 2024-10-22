@@ -1,10 +1,9 @@
 <?php
-
 $username = $_POST ['name'];
-$passward = $_POST ['passward'];
-$result = validate_contion($username,$passward);
+$password = $_POST ['passward'];
+$result = validate_function($username,$password);
 if($result){
-  print("login successfull");
+  print("<b>login successfull</b>");
 }
 else{
 
@@ -21,7 +20,7 @@ else{
       <label for="floatingInput">Email address</label>
     </div>
     <div class="form-floating">
-      <input name="passward" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
 
