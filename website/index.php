@@ -1,7 +1,6 @@
 <?php
-include 'libs/load.php'
+include 'libs/load.php';
 ?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,7 +12,7 @@ include 'libs/load.php'
     <title>TRAINING PHP</title>
   <!-- Bootstrap core CSS -->
 <link href="/website/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<link href="/website/assets/dist/css/signin.css" rel="stylesheet">
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -35,22 +34,16 @@ include 'libs/load.php'
   <body>
     
 <header>
-  
-
-  <?php load_templates('header');
+<main class="form-signin">
+  <?php 
+  load_templates('login');
   ?>
-</header>
-<main>
-  <?php load_templates('content');
-  ?>
-  <?php
-  load_templates('photos');
-  ?>
-
  </main>
- <?php
+<?php
  load_templates('footer');
  ?>
  <script src="/website/assets/dist/js/bootstrap.bundle.min.js"></script>
  </body>
+
 </html>
+
