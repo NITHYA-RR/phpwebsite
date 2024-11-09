@@ -1,6 +1,6 @@
 <?php
 $username = $_POST ['name'];
-$password = $_POST ['passward'];
+$password = $_POST ['password'];
 $result = validate_function($username,$password);
 if($result){
   print("<b>login successfull</b>");
@@ -11,7 +11,7 @@ else{
 
 
 <main class="form-signin">
-<form method="post" action="index.php">
+<form method="post" action="login.php">
     <img class="mb-4" src="/home/sathis/Downloads/phplogo" alt="" width="72" height="50">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
