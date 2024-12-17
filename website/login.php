@@ -4,7 +4,6 @@ include 'libs/load.php';
 <!doctype html>
 <html lang="en">
   <head>
-  <link href="/website/assets/dist/css/bootstrap.min.css" rel="stylesheet">
   <?php
   load_templates('head');
   ?>
