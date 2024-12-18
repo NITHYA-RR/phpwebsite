@@ -9,6 +9,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
     <!-- Bootstrap core CSS -->
     <link href="/website/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/website/assets/dist/css/signin.css" rel="stylesheet">
-    <link href="/website/assets/dist/css/login.css" rel="stylesheet">
+    <link href="/website/Css/login.css" rel="stylesheet">
+    <link href="/website/Css/signin.css" rel="stylesheet">
+
 </head>

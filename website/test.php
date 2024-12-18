@@ -1,5 +1,7 @@
 <pre>
-  <?php
-print_r($_POST)
+<?php
+include 'libs/load.php';
+// kjnkcnvmc
+  signup("", "", "", "");
 ?>
 </pre>
