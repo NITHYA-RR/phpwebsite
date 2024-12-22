@@ -2,6 +2,12 @@
 <?php
 include 'libs/load.php';
 // kjnkcnvmc
-  signup("", "", "", "");
+  if(signup("sathis", "ramesh", "nithya@gmail.com", "234565")){
+    echo "Sucess !!";
+  }
+  else {
+    echo "fail";
+   }
+
 ?>
 </pre>

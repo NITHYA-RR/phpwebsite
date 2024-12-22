@@ -10,8 +10,7 @@ function validate_function($username, $password) {
         return false;
     }
 }
-
-function signup($email, $phone) {
+function signup($user, $pass, $email, $phone) {
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -23,20 +22,21 @@ function signup($email, $phone) {
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
+    } 
+    //Add logic to insert the data into a database table
+    //Example:
+    $sql = "INSERT INTO `collect the data` (`username`, `password`, `email`, `phone`, `blocked`, `active`)
+     VALUES ('$user', '$pass', '$email', '$phone', '0','0');";
+    $result = false;
+    if ($conn->query($sql) === true) {
+        $result = true;
     } else {
-        echo "Success";
-    }
-
-    // Add logic to insert the data into a database table
-    // Example:
-    // $sql = "INSERT INTO users (email, phone) VALUES ('$email', '$phone')";
-    // if ($conn->query($sql) === TRUE) {
-    //     echo "New record created successfully";
-    // } else {
-    //     echo "Error: " . $sql . "<br>" . $conn->error;
-    // }
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        $result = false;
+     }
 
     $conn->close();
+    return $result;
 }
 
 
