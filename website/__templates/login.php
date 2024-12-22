@@ -1,15 +1,12 @@
 <?php
 $username = $_POST ['name'];
 $password = $_POST ['password'];
-$result = validate_function($username,$password);
+$result = validate_credentials($username,$password);
 if($result){
   print("<b>login successfull</b>");
 }
 else{
-
-?>
-
-
+  ?>
 <main class="form-signin">
 <form method="post" action="login.php">
     <img class="mb-4" src="/home/sathis/Downloads/phplogo" alt="" width="72" height="50">

@@ -3,7 +3,7 @@ function load_templates($name) {
     include __DIR__ . "/../__templates/$name.php";
 }
 
-function validate_function($username, $password) {
+function validate_credentials($username, $password) {
     if ($username == "nithya@gmail.com" and $password == "password") {
         return true;
     } else {
@@ -27,16 +27,16 @@ function signup($user, $pass, $email, $phone) {
     //Example:
     $sql = "INSERT INTO `collect the data` (`username`, `password`, `email`, `phone`, `blocked`, `active`)
      VALUES ('$user', '$pass', '$email', '$phone', '0','0');";
-    $result = false;
+    $error = false;
     if ($conn->query($sql) === true) {
-        $result = true;
+        $error = false;
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-        $result = false;
+        // echo "Error: " . $sql . "<br>" . $conn->error;
+        $error = $conn->error;
      }
 
     $conn->close();
-    return $result;
+    return $error;
 }
 
 
