@@ -13,12 +13,22 @@ $signup = true;
  if($signup) {
   if (!$error) {
   ?>
+  <center>
   <h1><br>signup successfull</br></h1>
-  <P>No you can login form <a href="login.php">Here</a></P>
+  <P>You can login form <a href="login.php">Here</a></P>
+  </center>
   <?php
-} else {
+  }
+ else{
   ?>
-<main class="form-signup">
+  <h1>signup Failed..!</h1>
+  <P>No You can't Successfull..!</P>
+<?php
+  }
+}
+else { 
+?>
+  <main class="form-signup">
   <form method="POST" action="signup.php">
     <img class="mb-4" src="/home/sathis/Downloads/phplogo" alt="" width="72" height="50">
     <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
@@ -44,5 +54,6 @@ $signup = true;
 </main>
 <?php
 }
-}
+ 
 ?>
+
