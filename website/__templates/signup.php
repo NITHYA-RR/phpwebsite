@@ -5,7 +5,7 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 $email = $_POST['email'];
 $phone = $_POST['phone'];
-$error = signup($username , $password , $email , $phone);
+$error = User::signup($username , $password , $email , $phone);
 $signup = true;
  }
  ?>
@@ -14,7 +14,7 @@ $signup = true;
   if (!$error) {
   ?>
   <center>
-  <h1><br>signup successfull</br></h1>
+  <h1><b>Signup Successfull</b></h1>
   <P>You can login form <a href="login.php">Here</a></P>
   </center>
   <?php
