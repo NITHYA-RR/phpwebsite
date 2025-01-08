@@ -19,6 +19,23 @@ class User
     //$conn->close();
     return $error;
     }
+    public static function login($username, $password){
+        $pass = md5(strrev(md5($password)));
+        $query = "SELECT * FROM `collect the data` WHERE `username`='$username'";
+        $conn = Database::getConnection();
+        $result = $conn->query($query);
+        if($result->num_rows == 1){
+            $rows = $result->fetch_assoc();
+            if($rows['password']==$password){
+            return $rows;
+            }
+
+        }
+        else{
+            return false;
+        }
+        
+    }
 
     public function __construct($username){
         $this->conn = Database::getConnection();
