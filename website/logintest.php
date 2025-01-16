@@ -2,8 +2,8 @@
 include 'libs/load.php';
 
 
-$username = "Nithya";
-$password = "d5b1e00208eb0af7ba5cc6dba55bf85a";
+$username = "Mrksn";
+$password = isset($_GET['pass']) ? $_GET['pass'] :'';
 $result = null;
 if(isset($_GET['logout'])){
     Session::destroy();
@@ -22,7 +22,7 @@ if($result){
     Session::set('session_user',$result);
 }
 else{
-    print("Login failed..<br>");
+    print("Login failed..$username<br>");
 }
 }
 echo <<<EGO
