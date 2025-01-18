@@ -1,6 +1,6 @@
 <?php
-$username = $_POST ['username'];
-$password = $_POST ['password'];
+$username = $_POST ['Nithya'];
+$password = $_POST ['nithya@20004'];
 $result = validate_credentials($username,$password);
 if($result){
   print("<center><h1><b>login successfull</b></h></center>");

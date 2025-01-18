@@ -11,7 +11,7 @@ function load_templates($name) {
 }
 
 function validate_credentials($username, $password) {
-    if ($username == "Nithya" and $password == "password") {
+    if ($username == "Nithya" and $password == "nithya@2004") {
         return true;
     } else {
         return false;
