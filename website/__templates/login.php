@@ -1,11 +1,11 @@
 <?php
-$username = $_POST ['Nithya'];
-$password = $_POST ['nithya@20004'];
-$result = validate_credentials($username,$password);
-if($result){
-  print("<center><h1><b>login successfull</b></h></center>");
-}
-else{
+//$username = $_POST ['Nithya'];
+//$password = $_POST ['nithya@20004'];
+//$result = validate_credentials($username,$password);
+//if($result){
+ // print("<center><h1><b>login successfull</b></h></center>");
+//}
+//else{
   ?>
 <main class="form-signin">
 <form method="post" action="login.php">
@@ -31,5 +31,5 @@ else{
   </form>
 </main>
 <?php
-}
+//}
 ?>

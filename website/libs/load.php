@@ -4,7 +4,22 @@ include_once 'libs/includes/Mic.class.php';
 include_once 'libs/includes/User.class.php';
 include_once 'libs/includes/Database.class.php';
 
+global $__site__config;
+$__site__config = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/.../photogramconfig.json');
+
 session::start();
+
+function get_config($key, $default=null){
+    global $__site__config;
+    $array = json_decode($__site__config,true);
+    if(isset($array[$key])){
+        return $array[$key];
+}
+else{
+    return $default;
+}
+
+}
 
 function load_templates($name) {
     include __DIR__ . "/../__templates/$name.php";

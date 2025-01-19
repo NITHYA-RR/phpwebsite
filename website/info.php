@@ -7,5 +7,4 @@
 // }  else {
     // echo "mysqli is not enabled!";
 // }
-print("hello")
 ?>
