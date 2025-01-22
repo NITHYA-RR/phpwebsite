@@ -10,19 +10,20 @@ if(isset($_GET['logout'])){
     die("Session destroyed, <a href='logintest.php'>Login again</a>");
 }
 if(Session::get('is_loggedin')){
-    $userdata = Session::get('session_user');
-    print("Welcome back, $userdata[username]");
-    $result = $userdata;
+    $username = Session::get('session_username');
+    $user = new User($username);
+    print("Welcome back," .$user->getUsername());
+    $result = $user;
 }else{
     print("No session is not found.. Trying to login now.<br>");
     $result = User::login($username,$password);
 if($result){
-    print("Login success $result[username]");
+    print("Login success $username");
     Session::set('is_loggedin',true);
     Session::set('session_user',$result);
 }
 else{
-    print("Login failed..$username<br>");
+    print("Login failed..$user<br>");
 }
 }
 echo <<<EGO

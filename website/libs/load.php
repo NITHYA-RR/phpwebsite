@@ -5,7 +5,7 @@ include_once 'libs/includes/User.class.php';
 include_once 'libs/includes/Database.class.php';
 
 global $__site__config;
-$__site__config = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/.../photogramconfig.json');
+$__site__config = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/./photogramconfig.json');
 
 session::start();
 
@@ -26,7 +26,7 @@ function load_templates($name) {
 }
 
 function validate_credentials($username, $password) {
-    if ($username == "Nithya" and $password == "nithya@2004") {
+      if ($username == "Nithya" and $password == "nithya@2004") {
         return true;
     } else {
         return false;
