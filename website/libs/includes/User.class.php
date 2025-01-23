@@ -1,9 +1,10 @@
 <?php
 require_once "Database.class.php";
+
 class User
 {
     private $conn;
-    public$username;
+    public $username;
     public $id;
 
     public function __call($name, $arguments)
@@ -15,19 +16,19 @@ class User
             return $this->_get_data($property);
 
         }elseif(substr($name, 0, 3) == "set"){
-            return $this->_set_data($name, $arguments[0]);
+            return $this->_set_data($property, $arguments[0]);
 
     }
 }
-    public static function signup($username, $password, $email, $phone)
+    public static function signup($user, $pass, $email, $phone)
     {
         $options = [
             'cost'=>9,
         ];
-    $password = password_hash($password, PASSWORD_BCRYPT, $options);
+    $password = password_hash($pass, PASSWORD_BCRYPT, $options);
     $conn = Database::getConnection();
     $sql = "INSERT INTO `collect the data` (`username`, `password`, `email`, `phone`, `blocked`, `active`)
-     VALUES ('$username', '$password', '$email', '$phone', '0','0');";
+     VALUES ('$user', '$password', '$email', '$phone', '0','0');";
     $error = false;
     if ($conn->query($sql) === true) {
         $error = false;
@@ -36,7 +37,7 @@ class User
         $error = $conn->error;
      }
 
-    $conn->close();
+    //$conn->close();
     return $error;
     }
     public static function login($username, $password){
@@ -60,7 +61,6 @@ class User
      public function __construct($username){
         $this->conn = Database::getConnection();
         $this->username = $username;
-        $this->id = null;
         $sql = "SELECT `id` FROM `collect the data` WHERE `username`='$username' LIMIT 1";
         $result = $this->conn->query($sql);
         if($result->num_rows) {
@@ -68,17 +68,17 @@ class User
             $this->id = $row['id'];
         }
         else{
-            throw new exception("Username dosn't exist..!");
+            throw new Exception("Username dosn't exist..!");
+            
         }
-        print($this->id);
     }
     private function _get_data($var){
         if(!$this->conn){
             $this->conn = Database::getConnection();
         }
-        $sql = "SELECT `$var` FROM `users` WHERE `id`='$this->id'";
+        $sql = "SELECT `$var` FROM `users` WHERE `id`= $this->id";
         $result = $this->conn->query($sql);
-        if($result->num_rows == 1){
+        if($result and $result->num_rows == 1){
             return $result->fetch_assoc()["$var"];
         }
         else{
@@ -91,7 +91,7 @@ class User
         if(!$this->conn){
             $this->conn = Database::getConnection();
         }
-        $sql = "UPDATE `users` SET `$var`='$data' WHERE `id`='$this->id'";
+        $sql = "UPDATE `users` SET `$var`='$data' WHERE `id`= $this->id";
         $result = $this->conn->query($sql);
         if($result->num_rows == 1){
             return true;
@@ -100,6 +100,10 @@ class User
             return false;
         }
         
+    }
+
+    public function getUsername(){
+        return $this->username;
     }
    // private function authenticate(){
    // }
