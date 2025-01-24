@@ -22,7 +22,7 @@ else{
 
 if($result){
     $userobj = New User($username);
-    echo "Login Success",$userobj->getUsername();
+    echo "Login Success <br>",$userobj->getUsername();
     Session::set('is_loggedin',true);
     Session::set('session_username',$result);
 }

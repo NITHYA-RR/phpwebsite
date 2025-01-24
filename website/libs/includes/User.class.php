@@ -18,6 +18,8 @@ class User
         }elseif(substr($name, 0, 3) == "set"){
             return $this->_set_data($property, $arguments[0]);
 
+    }else{
+        throw new Exception("User::call() -> $name, function unavailable.");
     }
 }
     public static function signup($user, $pass, $email, $phone)
@@ -61,7 +63,7 @@ class User
      public function __construct($username){
         $this->conn = Database::getConnection();
         $this->username = $username;
-        $sql = "SELECT `id` FROM `collect the data` WHERE `username`='$username' LIMIT 1";
+        $sql = "SELECT `id` FROM `collect the data` WHERE `username`='$username' OR `id` = 'username' LIMIT 1";
         $result = $this->conn->query($sql);
         if($result->num_rows) {
             $row = $result->fetch_assoc();
