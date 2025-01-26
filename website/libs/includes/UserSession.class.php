@@ -1,6 +1,6 @@
 <?php
 class UserSession{
-        public $id;
+        public $token;
         public $conn;
         public $uid;
         public $data;
@@ -11,23 +11,41 @@ class UserSession{
         public static function authenticate($username, $password){
             
             $username = User::login($username, $password);
+            $user = new User($username);
 
             if($username){
-                //$this->conn = Database::getConnection();
+                $conn = Database::getConnection();
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $agent = $_SERVER['HTTP_USER_AGENT'];
+                $token = md5(rand(0, 9999999). $ip.$agent.time());
+                $sql = "INSERT INTO `session` (`id`, `uid`, `token`, `login_time`, `ip`, `user_agent`, `active`) 
+                VALUES ('$user->'id', '$token', '2025-01-07 21:27:26', '$ip', '$agent', '1')";
+                if($conn->query($sql)){
+                    Session::set('session_token', $token);
+                    return $token;
+                }
+                else{
+                    return false;
+                }
             }else{
                 return false;
 
             }
 
-    
         }
+        public static function authorize($token){
+                $sees = new UserSession($token);
 
-
+            }
+        
         public function __construct($id)
         {
         $this->conn = Database::getConnection();
-        $this->id = $id;
-        $sql = "SELECT * FROM `session` WHERE `id`= $id LIMIT 1";
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        $token = md5(rand(0, 9999999). $ip.$agent.time());
+        $this->token = $token;
+        $sql = "SELECT * FROM `session` WHERE `token`= '$this->token' LIMIT 1";
         $result = $this->conn->query($sql);
         if($result->num_rows) {
             $row = $result->fetch_assoc();
@@ -38,6 +56,26 @@ class UserSession{
             throw new Exception("Session is invalid.....");
             
         }
-}
+    }
+        public static function getUser(){
+
+        }
+
+        public static function getIp(){
+
+        }
+
+        public static function isValid(){
+
+        }
+
+        public static function getUserAgent(){
+
+        }
+
+        public static function deactive(){
+            
+        }
+
 }
 

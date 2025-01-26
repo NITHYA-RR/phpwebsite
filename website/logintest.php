@@ -8,7 +8,13 @@ if(isset($_GET['logout'])){
     Session::destroy();
     die("Session destroyed, <a href='logintest.php'>Login again</a>");
 }
-
+/*
+s1 :check if section_token is available.
+s2 :if yes , constract user session and see if it's successfull.
+s3:check if section is valid one 
+s4: if valis print "session validated"
+s5:Else print " session unvalid" and ask user to login.
+*/
 if(Session::get('is_loggedin')){
     //$this->$userobj = null;
     $username = Session::get('session_username');
