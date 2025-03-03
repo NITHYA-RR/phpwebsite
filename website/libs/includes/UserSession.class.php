@@ -35,6 +35,8 @@ class UserSession{
         }
         public static function authorize($token){
                 $sees = new UserSession($token);
+                
+
 
             }
         
