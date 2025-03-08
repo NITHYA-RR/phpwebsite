@@ -29,6 +29,7 @@ function load_templates($name) {
 function validate_credentials($username, $password) {
       if ($username == "Nithya" and $password == "nithya@2004") {
         return true;
+        print("super");
     } else {
         return false;
     }

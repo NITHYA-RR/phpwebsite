@@ -25,6 +25,7 @@ class User
     public static function signup($user, $pass, $email, $phone)
     {
         $options = [
+
             'cost'=>9,
         ];
     $password = password_hash($pass, PASSWORD_BCRYPT, $options);
