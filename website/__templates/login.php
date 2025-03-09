@@ -1,11 +1,4 @@
 <?php
-$username = $_POST ['Nithya'];
-$password = $_POST ['nithya@20004'];
-$result = validate_credentials($username,$password);
-if($result){
- print("<center><h1><b>login successfull</b></h></center>");
-}
-else{
   ?>
 <main class="form-signin">
 <form method="post" action="login.php">
@@ -13,8 +6,8 @@ else{
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">
-      <input name="username" type="username" class="form-control" id="floatingInput" placeholder="">
-      <label for="floatingInput">Email address</label>
+      <input name="username" type="username" class="form-control" id="floatingInput" placeholder="username">
+      <label for="floatingInput">Username</label>
     </div>
     <div class="form-floating">
       <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
@@ -31,5 +24,5 @@ else{
   </form>
 </main>
 <?php
-}
+
 ?>

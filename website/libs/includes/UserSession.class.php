@@ -33,24 +33,24 @@ class UserSession{
             }
 
         }
-        public static function authorize($token){
-                // $sees = new UserSession($token);
-                //     $conn = Database::getConnection();
+        // public static function authorize($token){
+        //         $sees = new UserSession($token);
+        //             $conn = Database::getConnection();
                     
-                //     // Validate input token
-                //     $token = $conn->real_escape_string($token);
+        //             // Validate input token
+        //             $token = $conn->real_escape_string($token);
                 
-                //     // Query to check if the token exists and is active
-                //     $sql = "SELECT * FROM session WHERE token = '$token' AND active = 1 LIMIT 1";
-                //     $result = $conn->query($sql);
+        //             // Query to check if the token exists and is active
+        //             $sql = "SELECT * FROM session WHERE token = '$token' AND active = 1 LIMIT 1";
+        //             $result = $conn->query($sql);
                 
-                //     if ($result->num_rows > 0) {
-                //         $row = $result->fetch_assoc();
-                //         return new User($row['uid']);  // Return the authenticated user object
-                //     } else {
-                //         return false;  // Token is invalid or session expired
-                //     }
-                }
+        //             if ($result->num_rows > 0) {
+        //                 $row = $result->fetch_assoc();
+        //                 return new User($row['uid']);  // Return the authenticated user object
+        //             } else {
+        //                 return false;  // Token is invalid or session expired
+        //             }
+        //         }
                 
         
         public function __construct($id)
