@@ -1,38 +1,40 @@
 <?php
-class UserSession{
-        public $token;
-        public $conn;
-        public $uid;
-        public $data;
-        /*
-        This function will return a session id if username and password in correct..
-        */
+class UserSession {
+    public $token;
+    public $conn;
+    public $uid;
+    public $data;
 
-        public static function authenticate($username, $password){
-            
-            $username = User::login($username, $password);
-            $user = new User($username);
+    public static function authenticate($username, $password) {
+        $conn = Database::getConnection();
 
-            if($username){
-                $conn = Database::getConnection();
-                $ip = $_SERVER['REMOTE_ADDR'];
-                $agent = $_SERVER['HTTP_USER_AGENT'];
-                $token = md5(rand(0, 9999999). $ip.$agent.time());
-                $sql = "INSERT INTO `session` (`id`, `uid`, `token`, `login_time`, `ip`, `user_agent`, `active`) 
-                VALUES ('$user->'id', '$token', '2025-01-07 21:27:26', '$ip', '$agent', '1')";
-                if($conn->query($sql)){
-                    Session::set('session_token', $token);
-                    return $token;
-                }
-                else{
-                    return false;
-                }
-            }else{
-                return false;
-
-            }
-
+        // Verify user credentials
+        $userId = User::login($username, $password);
+        
+        if (!$userId) {
+            return false; // Authentication failed
         }
+
+        // Fetch user details
+        $user = new User($userId);
+
+        // Generate secure session token
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        $token = md5(rand(0, 9999999) . $ip . $agent . time());
+
+        // Store session in database
+        $login_time = date("Y-m-d H:i:s"); // Current timestamp
+        $sql = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `user_agent`, `active`) 
+                VALUES ('$user->id', '$token', '$login_time', '$ip', '$agent', '1')";
+        if ($conn->query($sql)) {
+            Session::set('session_token', $token); // Store token in session
+            return $token;
+        } else {
+            return false;
+        }
+    }
+    
         // public static function authorize($token){
         //         $sees = new UserSession($token);
         //             $conn = Database::getConnection();
@@ -93,4 +95,5 @@ class UserSession{
         }
 
 }
+
 
