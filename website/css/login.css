@@ -3,6 +3,7 @@
     max-width: 330px;
     padding: 15px;
     margin: auto;
+    background-color: rgb(255, 157, 157);
   }
   
   .form-signin .checkbox {

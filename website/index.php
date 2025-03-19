@@ -1,8 +1,6 @@
 <?php
 include 'libs/load.php';
 ?>
-
-
 <!doctype html>
 <html lang="en">
   <?php
@@ -28,10 +26,6 @@ include 'libs/load.php';
 <?php
 load_templates('footer')
 ?>
-
-
-    <script src="/website/assets/dist/js/bootstrap.bundle.min.js"></script>
-
-      
-  </body>
+<script src="/website/assets/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
