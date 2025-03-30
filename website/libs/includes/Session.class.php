@@ -32,11 +32,6 @@ class session{
             return $default;
         }
      }
- 
-
-
-
-
-
 }
 ?>
+

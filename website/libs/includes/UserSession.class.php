@@ -14,15 +14,12 @@ class UserSession {
         if (!$userId) {
             return false; // Authentication failed
         }
-
         // Fetch user details
         $user = new User($userId);
-
         // Generate secure session token
         $ip = $_SERVER['REMOTE_ADDR'];
         $agent = $_SERVER['HTTP_USER_AGENT'];
         $token = md5(rand(0, 9999999) . $ip . $agent . time());
-
         // Store session in database
         $login_time = date("Y-m-d H:i:s"); // Current timestamp
         $sql = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `user_agent`, `active`) 

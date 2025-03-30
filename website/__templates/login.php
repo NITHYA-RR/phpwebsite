@@ -2,6 +2,11 @@
 require_once __DIR__ . "/../libs/includes/Session.class.php";  
 require_once __DIR__ . "/../libs/includes/User.class.php";
 
+// Check if session is already active before calling session_start()
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Handle logout request
 if (isset($_GET['logout'])) {
     if (Session::get('is_loggedin')) { 
@@ -15,13 +20,14 @@ if (isset($_GET['logout'])) {
     exit();
 }
 
-// If the user is already logged in, print "Welcome back" and include index.php
+// If the user is already logged in, show "Welcome back"
 if (Session::get('is_loggedin')) {
-    $username = Session::get('session_username');
+    $username = Session::get('session_username') ?? ''; // Ensure a default value
     $userobj = new User($username);
-    echo "<h2>Welcome back, " . $userobj->getFirstname() . "!</h2>";
-    //include "index.php";
-    exit();
+
+    $firstname = $userobj->getFirstname() ?? 'User'; // Avoid passing null to htmlspecialchars()
+    echo "<h2>Welcome back, " . htmlspecialchars($username, ENT_QUOTES, 'UTF-8') . "!</h2>";
+    exit(); // Stop script execution
 }
 
 // Handle login form submission
@@ -35,9 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         Session::set('is_loggedin', true);
         Session::set('session_username', $username);
 
-        // Print "Login success" message and include index.php
-        echo "<h2>Login success!</h2>";
-        //include "index.php";
+        // Print "Login success!" message for first-time login
+        echo "<h2>Login success, " . htmlspecialchars($username, ENT_QUOTES, 'UTF-8') . "!</h2>";
         exit();
     } else {
         $error_message = "Invalid username or password.";
@@ -60,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
 
             <?php if (isset($error_message)) : ?>
-                <p style="color: red;"><?php echo $error_message; ?></p>
+                <p style="color: red;"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></p>
             <?php endif; ?>
 
             <?php if (isset($_GET['message']) && $_GET['message'] === 'logout') : ?>
