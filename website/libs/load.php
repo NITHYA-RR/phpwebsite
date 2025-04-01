@@ -8,7 +8,7 @@ include_once 'libs/includes/WebAPI.class.php';
 
 
 global $__site__config;
-$__site__config = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/./photogramconfig.json');
+$__site__config = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/Automation/./photogramconfig.json');
 
 session::start();
 
