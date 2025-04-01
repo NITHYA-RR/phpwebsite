@@ -8,20 +8,17 @@ include_once 'libs/includes/WebAPI.class.php';
 
 
 global $__site__config;
-$__site__config = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/Automation/./photogramconfig.json');
-
-session::start();
+$__site__config = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '\Automation\photogramconfig.json');
+$__site__config = json_decode($__site__config, true);
+Session::start();
 
 function get_config($key, $default=null){
     global $__site__config;
-    $array = json_decode($__site__config,true);
-    if(isset($array[$key])){
-        return $array[$key];
-}
-else{
-    return $default;
-}
-
+    if(isset($__site__config[$key])){
+        return $__site__config[$key];
+    } else {
+        return $default;
+    }
 }
 
 function load_templates($name) {

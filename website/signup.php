@@ -1,5 +1,5 @@
 <?php
-include 'libs/load.php';
+include_once 'libs/load.php';
 ?>
 <!doctype html>
 <html lang="en">
