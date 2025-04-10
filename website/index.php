@@ -1,5 +1,6 @@
 <?php
 include 'libs/load.php';
+Session::renderpage();
 ?>
 <!doctype html>
 <html lang="en">

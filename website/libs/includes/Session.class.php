@@ -32,6 +32,18 @@ class session{
             return $default;
         }
      }
+
+    public static function load_templates($name) {
+        include __DIR__ . "/../__templates/$name.php";
+    }
+    
+     public static function renderpage($page = 'index.php'){
+        if(Session::isset('user')){
+            include_once 'website/__templates/__main.php';
+        }else{
+            include_once 'website/login.php';
+        }
+}
 }
 ?>
 

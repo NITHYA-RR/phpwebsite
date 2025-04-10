@@ -20,7 +20,6 @@ function get_config($key, $default=null){
         return $default;
     }
 }
-
 function load_templates($name) {
     include __DIR__ . "/../__templates/$name.php";
 }
