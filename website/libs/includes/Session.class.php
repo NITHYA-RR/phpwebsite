@@ -39,10 +39,13 @@ class session{
     
      public static function renderpage(){
         Session::load_templates('master');
-        Session::load_templates('master1');
+        
+    }
+     public static function currentScript(){
+        return basename($_SERVER['SCRIPT_NAME'],'.php');
+        
 
      }
-     
 }
 ?>
 
