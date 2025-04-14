@@ -1,6 +1,5 @@
 <?php
 include_once 'libs/includes/Session.class.php';
-include_once 'libs/includes/Mic.class.php';
 include_once 'libs/includes/User.class.php';
 include_once 'libs/includes/Database.class.php';
 include_once 'libs/includes/UserSession.class.php';
@@ -21,7 +20,12 @@ function get_config($key, $default=null){
     }
 }
 function load_templates($name) {
-    include __DIR__ . "/../__templates/$name.php";
+    $path = __DIR__ . "/../__templates/$name.php";
+    if (!file_exists($path)) {
+        echo "Error: Template file '$name.php' not found at $path";
+        return;
+    }
+    include $path;
 }
 
 function validate_credentials($username, $password) {

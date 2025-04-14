@@ -34,16 +34,15 @@ class session{
      }
 
     public static function load_templates($name) {
-        include __DIR__ . "/../__templates/$name.php";
+        include $_SERVER['DOCUMENT_ROOT'] . "/website/__templates/$name.php";
     }
     
-     public static function renderpage($page = 'index.php'){
-        if(Session::isset('user')){
-            include_once 'website/__templates/__main.php';
-        }else{
-            include_once 'website/login.php';
-        }
-}
+     public static function renderpage(){
+        Session::load_templates('master');
+        Session::load_templates('master1');
+
+     }
+     
 }
 ?>
 
