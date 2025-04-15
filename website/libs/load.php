@@ -21,10 +21,6 @@ function get_config($key, $default=null){
 }
 function load_templates($name) {
     $path = __DIR__ . "/../__templates/$name.php";
-    if (!file_exists($path)) {
-        echo "Error: Template file '$name.php' not found at $path";
-        return;
-    }
     include $path;
 }
 

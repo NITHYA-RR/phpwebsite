@@ -34,8 +34,14 @@ class session{
      }
 
     public static function load_templates($name) {
-        include $_SERVER['DOCUMENT_ROOT'] . "/website/__templates/$name.php";
+        $script =  $_SERVER['DOCUMENT_ROOT'] . "/website/__templates/$name.php";
+        if(is_file($script)){
+            include $script;
     }
+    else{
+        Session::load_templates('error');
+    }
+}
     
      public static function renderpage(){
         Session::load_templates('master');
@@ -45,6 +51,9 @@ class session{
         return basename($_SERVER['SCRIPT_NAME'],'.php');
         
 
+     }
+     public static function isAuthenticated(){
+        return true;
      }
 }
 ?>

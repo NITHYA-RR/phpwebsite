@@ -1,22 +1,35 @@
 <!doctype html>
 <html lang="en">
   <?php
-  load_templates('head');
+   Session::load_templates('head');
   ?>
   <body>
   <?php
-  load_templates('header');
+   Session::load_templates('header');
   ?>
   <?php
-  load_templates('content');
+   if(Session::isAuthenticated()){
+    Session::load_templates('index/content');
+    }
+    else{
+        Session::load_templates('index/login');
+    }
+    
   ?>
+
   <main>
   <?php
+  if(Session::get('error_page')){
+    Session::load_templates('error');
+    Session::set('error_page',false);
+  }else{
   load_templates(Session::currentScript());
+  }
   ?>
   </main>
   <?php
-  load_templates('footer');
+    Session::load_templates('footer');
+        
   ?>
   <script src="/website/assets/dist/js/bootstrap.bundle.min.js"></script>
 </body>
