@@ -8,23 +8,17 @@
    Session::load_templates('header');
   ?>
   <?php
-   if(Session::isAuthenticated()){
-    Session::load_templates('index/content');
-    }
-    else{
-        Session::load_templates('index/login');
-    }
-    
+
   ?>
 
   <main>
   <?php
-  if(Session::get('error_page')){
-    Session::load_templates('error');
-    Session::set('error_page',false);
-  }else{
+  // if(Session::get('error_page')){
+  //   Session::load_templates('error');
+  //   Session::set('error_page',false);
+  // }else{
   load_templates(Session::currentScript());
-  }
+  // }
   ?>
   </main>
   <?php

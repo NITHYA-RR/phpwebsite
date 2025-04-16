@@ -1,3 +1,12 @@
+  
+<?php
+if(Session::isAuthenticated()){
+    Session::load_templates('index/content');
+    }
+    else{
+        Session::load_templates('index/login');
+    }
+    ?>
 <div class="album py-5 bg-light">
     <div class="container">
 

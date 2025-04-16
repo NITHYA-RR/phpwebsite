@@ -1,4 +1,3 @@
-
 <?php
 class WebAPI {
     public function __construct() // Fixed constructor name

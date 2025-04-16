@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__ . "/../libs/includes/Session.class.php";  
 require_once __DIR__ . "/../libs/includes/User.class.php";
+require_once __DIR__ . "/../libs/includes/UserSession.class.php";
 
-// Check if session is already active before calling session_start()
+//Check if session is already active before calling session_start()
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -22,12 +23,12 @@ if (isset($_GET['logout'])) {
 
 // If the user is already logged in, show "Welcome back"
 if (Session::get('is_loggedin')) {
-    $username = Session::get('session_username') ?? ''; // Ensure a default value
-    $userobj = new User($username);
-
-    $firstname = $userobj->getFirstname() ?? 'User'; // Avoid passing null to htmlspecialchars()
-    echo "<h2>Welcome back, " . htmlspecialchars($username, ENT_QUOTES, 'UTF-8') . "!</h2>";
-    exit(); // Stop script execution
+    if (Session::get('is_loggedin')) {
+        // Already logged in? Just go to index.php
+        header("Location: index.php");
+        exit();
+    }
+    
 }
 
 // Handle login form submission
@@ -40,14 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Store session data
         Session::set('is_loggedin', true);
         Session::set('session_username', $username);
-
-        // Print "Login success!" message for first-time login
-        echo "<h2>Login success, " . htmlspecialchars($username, ENT_QUOTES, 'UTF-8') . "!</h2>";
+        header("Location: index.php");
         exit();
     } else {
         $error_message = "Invalid username or password.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>

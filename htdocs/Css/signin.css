@@ -9,26 +9,26 @@
 } 
 .form-signup .checkbox {
   font-weight: 400;
-  background-color:  #c0c4ca;
+  background-color:  #ffffff;
   /* background-color: aqua; */
 }
 
 .form-signup .form-floating:focus-within {
   z-index: 2;
-  background-color:  #c0c4ca;
+  background-color:  #ffffff;
 }
 .form-signup input[type="text"] {
   margin-top: 0;
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  background-color:  #c0c4ca;
+  background-color:  #ffffff;
 }
 .form-signup input[name="phone"] {
   margin-bottom: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  background-color:  #c0c4ca;
+  background-color:  #ffffff;
   
 } 
 
@@ -38,7 +38,7 @@
   border-bottom-left-radius: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  background-color:  #c0c4ca;
+  background-color:  #ffffff;
 }
 
 .form-signup input[type="password"] {
@@ -47,5 +47,5 @@
   border-top-right-radius: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  background-color: #c0c4ca;
+  background-color: #ffffff;
 }
