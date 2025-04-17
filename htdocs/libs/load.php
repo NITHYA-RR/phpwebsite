@@ -1,4 +1,8 @@
 <?php
+
+ini_set('max_execution_time', 0); // Set unlimited execution time
+ini_set('memory_limit', '512M');
+
 include_once 'libs/includes/Session.class.php';
 include_once 'libs/includes/User.class.php';
 include_once 'libs/includes/Database.class.php';

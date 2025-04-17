@@ -1,4 +1,5 @@
 <?php
+ini_set('memory_limit', '512M');
 class session{
     public static function start(){
         session_start();
@@ -32,18 +33,22 @@ class session{
             return $default;
         }
      }
-
-    public static function load_templates($name) {
-        $script =  $_SERVER['DOCUMENT_ROOT'] . "/website/__templates/$name.php";
-        if(is_file($script)){
-            include $script;
-    }
-    else{
-        Session::load_templates('error');
-    }
-}
+     public static function load_templates($name) {
+        static $errorCalled = false; // Prevents infinite loop
     
-     public static function renderpage(){
+        $script = $_SERVER['DOCUMENT_ROOT'] . "/htdocs/__templates/$name.php";
+        if (is_file($script)) {
+            include $script;
+        } else {
+            if (!$errorCalled) {
+                $errorCalled = true;
+                Session::load_templates($name); // only one retry
+            } else {
+                echo "Template '$name' not found. Error template also missing.";
+            }
+        }
+    }
+    public static function renderpage(){
         Session::load_templates('master');
         
     }

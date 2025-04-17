@@ -10,3 +10,46 @@
 
     # Add more rules as needed
 </IfModule>
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Handle logout request
+if (isset($_GET['logout'])) {
+    if (Session::get('is_loggedin')) { 
+        Session::destroy();
+        session_unset();
+        session_destroy();
+    }
+    
+    // Redirect to login.php with a logout message
+    header("Location: login.php?message=logout");
+    exit();
+}
+
+// If the user is already logged in, show "Welcome back"
+if (Session::get('is_loggedin')) {
+    if (Session::get('is_loggedin')) {
+        // Already logged in? Just go to index.php
+        header("Location: index.php");
+        exit();
+    }
+    
+}
+
+// Handle login form submission
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    // Attempt login
+    if (User::login($username, $password)) {
+        // Store session data
+        Session::set('is_loggedin', true);
+        Session::set('session_username', $username);
+        header("Location: index.php");
+        exit();
+    } else {
+        $error_message = "Invalid username or password.";
+    }
+}

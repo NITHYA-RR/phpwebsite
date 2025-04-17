@@ -8,8 +8,8 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
     <!-- Bootstrap core CSS -->
-    <link href="/website/assets/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/website/Css/login.css" rel="stylesheet">
-    <link href="/website/Css/signin.css" rel="stylesheet">
+    <link href="/htdocs/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/htdocs/Css/login.css" rel="stylesheet">
+    <link href="/htdocs/Css/signin.css" rel="stylesheet">
 
 </head>
