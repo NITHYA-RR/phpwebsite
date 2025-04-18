@@ -41,7 +41,10 @@ function signup($user, $pass, $email, $phone) {
     $conn = Database::getConnection();
 }
 
-
+function session($uid, $token, $login_time, $ip, $user_agent, $active) {
+   
+    $conn = Database::getConnection();
+}
 
 
 

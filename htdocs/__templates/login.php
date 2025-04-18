@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . "/../libs/includes/Session.class.php";  
-require_once __DIR__ . "/../libs/includes/User.class.php";
-require_once __DIR__ . "/../libs/includes/UserSession.class.php";
+// require_once __DIR__ . "/../libs/includes/Session.class.php";  
+// require_once __DIR__ . "/../libs/includes/User.class.php";
+// require_once __DIR__ . "/../libs/includes/UserSession.class.php";
 
 //Check if session is already active before calling session_start()
 if (session_status() === PHP_SESSION_NONE) {
