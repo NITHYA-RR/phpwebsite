@@ -28,6 +28,7 @@ $signup = true;
 }
 else { 
 ?>
+<body class="text-center">
   <main class="form-signup">
   <form method="POST" action="signup.php">
     <img class="mb-4" src="/home/sathis/Downloads/phplogo" alt="" width="72" height="50">
@@ -52,6 +53,7 @@ else {
    
   </form>
 </main>
+</body>
 <?php
 }
  

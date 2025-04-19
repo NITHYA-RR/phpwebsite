@@ -24,7 +24,7 @@ class Database{
 
             }
         } else{
-            printf("established the connection..");
+            // printf("established the connection..");
             return Database::$conn;
             
         }

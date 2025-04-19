@@ -1,5 +1,4 @@
 <?php
-ini_set('memory_limit', '512M');
 class session{
     public static function start(){
         session_start();

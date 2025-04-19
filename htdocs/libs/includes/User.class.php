@@ -1,4 +1,5 @@
 <?php
+
 require_once "Database.class.php";
 
 class User
@@ -61,18 +62,23 @@ class User
         }
         
     }
-     public function __construct($username){
+
+    public function __construct($value){
         $this->conn = Database::getConnection();
-        $this->username = $username;
-        $sql = "SELECT `id` FROM `collect the data` WHERE `username`='$username' OR `id` = 'username' LIMIT 1";
+    
+        if (is_numeric($value)) {
+            $sql = "SELECT `id`, `username` FROM `collect the data` WHERE `id` = '$value' LIMIT 1";
+        } else {
+            $sql = "SELECT `id`, `username` FROM `collect the data` WHERE `username` = '$value' LIMIT 1";
+        }
+    
         $result = $this->conn->query($sql);
         if($result->num_rows) {
             $row = $result->fetch_assoc();
-            $this->id = $row['id'];
-        }
-        else{
-            throw new Exception("Username dosn't exist..!");
-            
+            $this->id = $row['id']; // 🛠 Fix this line if it's mistyped
+            $this->username = $row['username'];
+        } else {
+            throw new Exception("Username doesn't exist..!");
         }
     }
     private function _get_data($var){
@@ -191,3 +197,4 @@ class User
 
 ?>
    
+
