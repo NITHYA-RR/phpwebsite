@@ -92,11 +92,21 @@ class UserSession {
         }
     }
 
-    public static function getIp() {
-        return $_SERVER['REMOTE_ADDR'];
+    
+    function getUserIP() {
+        foreach ([
+            'HTTP_CLIENT_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'REMOTE_ADDR'
+        ] as $key) {
+            if (!empty($_SERVER[$key])) {
+                return $_SERVER[$key];
+            }
+        }
+        return 'IP Not Found';
     }
-
-    public static function isValid() {
+    
+   public static function isValid() {
         $token = Session::get('session_token');
         if (!$token) return false;
         $conn = Database::getConnection();
