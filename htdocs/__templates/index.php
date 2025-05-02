@@ -7,6 +7,7 @@ if(Session::isAuthenticated()){
         Session::load_templates('index/login');
     }
     ?>
+  
 <div class="album">
     <div class="container">
 

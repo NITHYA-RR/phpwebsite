@@ -32,16 +32,23 @@ class session{
             return $default;
         }
      }
+     
+    //  public static  function grtUser(){
+    //     return Session::$user;
+
+    //  }
      public static function load_templates($name) {
         static $errorCalled = false; // Prevents infinite loop
     
+        // Corrected path to the templates directory
         $script = $_SERVER['DOCUMENT_ROOT'] . "/htdocs/__templates/$name.php";
         if (is_file($script)) {
             include $script;
         } else {
             if (!$errorCalled) {
                 $errorCalled = true;
-                Session::load_templates($name); // only one retry
+                echo "Template '$name' not found. Retrying...";
+                Session::load_templates('error'); // Retry with an error template
             } else {
                 echo "Template '$name' not found. Error template also missing.";
             }
@@ -57,8 +64,49 @@ class session{
 
      }
      public static function isAuthenticated(){
-        return true;
+        if(is_object(Session::getUserSession())){
+            return Session::getUserSession()->isvalid();
+        }
+       return true;
      }
+
+    public static function getUserSession() {
+        $token = Session::get('session_token');
+        if (!$token) {
+            return false; // No session token found
+        }
+
+        try {
+            return new UserSession($token); // Return the UserSession object
+        } catch (Exception $e) {
+            error_log("Error in getUserSession: " . $e->getMessage());
+            return false;
+        }
+    }
+    public static function ensurelogin(){
+        if(!Session::isAuthenticated()){
+            Session::set('_redirect',$_SERVER['REQUEST_URI']);
+            header("Location: /login.php");
+            exit;
+        }
+    }
+
+
+public static function getUser() {
+    // Retrieve the session token
+    $token = self::get('session_token'); // Assuming 'session_token' is stored in the session
+    if (!$token) {
+        throw new Exception("No session token found. User is not logged in.");
+    }
+
+    try {
+        // Return the User object or UserSession object
+        return new UserSession($token); // Assuming UserSession handles user data
+    } catch (Exception $e) {
+        error_log("Error in Session::getUser(): " . $e->getMessage());
+        return null;
+    }
+}
 }
 ?>
 

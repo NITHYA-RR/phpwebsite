@@ -1,28 +1,16 @@
 <?php
 
 require_once "Database.class.php";
+require_once __DIR__ . '/../traits/SQLGetterSetterdata.trait.php'; // Include the trait
 
 class User
 {
     private $conn;
     public $username;
     public $id;
+    public $table;
+    use SQlGetterSetter;// Assuming this trait is defined in another file
 
-    public function __call($name, $arguments)
-    {
-        $property = preg_replace("/[^0-9a-zA-Z]/", "",substr($name,3));
-        $property = strtolower(preg_replace('/\B[A-Z]/','_$1',$property));
-
-        if(substr($name, 0, 3) == "get"){
-            return $this->_get_data($property);
-
-        }elseif(substr($name, 0, 3) == "set"){
-            return $this->_set_data($property, $arguments[0]);
-
-    }else{
-        throw new Exception("User::call() -> $name, function unavailable.");
-    }
-}
     public static function signup($user, $pass, $email, $phone)
     {
         $options = [
@@ -62,8 +50,7 @@ class User
         }
         
     }
-
-    public function __construct($value){
+ function __construct($value){
         $this->conn = Database::getConnection();
     
         if (is_numeric($value)) {
@@ -77,38 +64,10 @@ class User
             $row = $result->fetch_assoc();
             $this->id = $row['id']; // 🛠 Fix this line if it's mistyped
             $this->username = $row['username'];
+            $this->table = 'collect the data'; // Assuming this is the table name
         } else {
             throw new Exception("Username doesn't exist..!");
         }
-    }
-    private function _get_data($var){
-        if(!$this->conn){
-            $this->conn = Database::getConnection();
-        }
-        $sql = "SELECT `$var` FROM `users` WHERE `id`= $this->id";
-        $result = $this->conn->query($sql);
-        if($result and $result->num_rows == 1){
-            return $result->fetch_assoc()["$var"];
-        }
-        else{
-            return null;
-        }
-        
-    }
-
-    private function _set_data($var, $data){
-        if(!$this->conn){
-            $this->conn = Database::getConnection();
-        }
-        $sql = "UPDATE `users` SET `$var`='$data' WHERE `id`= $this->id";
-        $result = $this->conn->query($sql);
-        if($result->num_rows == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-        
     }
 
     public function getUsername(){

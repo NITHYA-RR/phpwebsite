@@ -1,12 +1,14 @@
 <?php
 
 
-
+//implement automate if class files;
 include_once 'libs/includes/Session.class.php';
 include_once 'libs/includes/User.class.php';
 include_once 'libs/includes/Database.class.php';
 include_once 'libs/includes/testUserSession.php';
 include_once 'libs/includes/WebAPI.class.php';
+include_once 'libs/app/post.class.php';
+
 
 
 global $__site__config;
@@ -30,7 +32,6 @@ function load_templates($name) {
 function validate_credentials($username, $password) {
       if ($username == "Nithya" and $password == "nithya@2004") {
         return true;
-        print("super");
     } else {
         return false;
     }

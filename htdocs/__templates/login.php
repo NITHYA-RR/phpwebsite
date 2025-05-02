@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . "/../libs/includes/Session.class.php";  
-require_once __DIR__ . "/../libs/includes/User.class.php";
-require_once __DIR__ . "/../libs/includes/UserSession.class.php";
+include_once __DIR__ . "/../libs/includes/Session.class.php";  
+include_once __DIR__ . "/../libs/includes/User.class.php";
+include_once __DIR__ . "/../libs/includes/UserSession.class.php";
+
 
 //Check if session is already active before calling session_start()
 if (session_status() === PHP_SESSION_NONE) {
@@ -10,25 +11,19 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Handle logout request
 if (isset($_GET['logout'])) {
-    if (Session::get('is_loggedin')) { 
-        Session::destroy();
-        session_unset();
-        session_destroy();
-    }
-    
+    // Destroy the session
+    session_unset();
+    session_destroy();
+
     // Redirect to login.php with a logout message
     header("Location: login.php?message=logout");
     exit();
 }
 
 // If the user is already logged in, show "Welcome back"
-if (Session::get('is_loggedin')) {
-    if (Session::get('is_loggedin')) {
-        // Already logged in? Just go to index.php
-        header("Location: index.php");
-        exit();
-    }
-    
+if (isset($_SESSION['is_loggedin']) && $_SESSION['is_loggedin'] === true) {
+    header("Location: index.php");
+    exit();
 }
 
 // Handle login form submission
@@ -44,10 +39,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: index.php");
         exit();
     } else {
-        $error_message = "Invalid username or password.";
+        ?>
+<main class="container">
+    <div style="background-color: #d1ecf1; color: #0c5460; padding: 15px; border-radius: 5px; border: 1px solid #bee5eb;">
+        Please enter your username and password.
+    </div>
+</main>
+
+
+
+        
+            <?php
+           
     }
 }
-
+else{
 ?>
 
 <!DOCTYPE html>
@@ -64,14 +70,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <img class="mb-4" src="/home/sathis/Downloads/phplogo" alt="" width="72" height="50">
             <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
 
-            <?php if (isset($error_message)) : ?>
-                <p style="color: red;"><?php echo htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8'); ?></p>
-            <?php endif; ?>
-
-            <?php if (isset($_GET['message']) && $_GET['message'] === 'logout') : ?>
-                <p style="color: green;">You have been logged out successfully.</p>
-            <?php endif; ?>
-
+            <?php if (isset($_GET['error'])){?>
+                
+                <div class="alert alert-danger" role="alert">
+                    Invalid username or password.
+                </div>
+           <?php } ?>
             <div class="form-floating">
                 <input name="username" type="text" class="form-control" id="floatingInput" placeholder="Username" required>
                 <label for="floatingInput">Username</label>
@@ -87,9 +91,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </label>
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <a href="signup.php" class="w-100 btn btn-link">Not Rgistered yet? Sign up</a>
         </form>
     </main>
 </body>
 </html>
 
+<?php
+}
 
