@@ -14,7 +14,7 @@ public function __call($name, $arguments)
         return $this->_set_data($property, $arguments[0]);
 
 }else{
-    throw new Exception("Post::call() -> $name, function unavailable.");
+    throw new Exception("_CLASS_.::call() -> $name, function unavailable.");
 }
 }
  
