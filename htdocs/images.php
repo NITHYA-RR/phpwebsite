@@ -4,7 +4,7 @@ include __DIR__ . "/libs/load.php";
 $upload_path = get_config('upload_path');
 $fname = $_GET['name'];
 $image_path = $upload_path . $fname;
-
+$image_path = str_replace('..', '', $image_path); // Prevent directory traversal attacks
 // Check if the file exists
 if (!file_exists($image_path)) {
     die("File not found. Resolved path: " . $image_path);

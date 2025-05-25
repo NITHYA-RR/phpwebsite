@@ -15,7 +15,7 @@ include_once __DIR__ . "/../../libs/includes/User.class.php";
         <p class="lead text-muted">Share a photo that talks about it.</p>
         <textarea id="post_text" name="post_text" class="form-control" placeholder="What are you upto?" rows="3"></textarea>
         <div class="input-group mb-3">
-          <input type="file" class="form-control" name="post_image" id="inputGroupFile02">
+          <input type="file" accept="image/*" class="form-control" name="post_image" id="inputGroupFile02">
         </div>
         <p>
           <button class="btn btn-success my-2" type="submit">Share memory</button>

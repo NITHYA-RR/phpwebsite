@@ -7,7 +7,7 @@ class Database{
             $servername = "localhost";
             $username = "root";
             $password = "";
-            $dbname = "php";
+            $dbname = "apis";
         
             // Create connection
             $conn = new mysqli($servername, $username, $password, $dbname);

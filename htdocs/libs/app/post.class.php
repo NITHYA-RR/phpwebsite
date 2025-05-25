@@ -7,16 +7,14 @@ class Post{
     private $table;
     use SQlGetterSetter;
     public static function registerPost($text, $image_tmp){
-        if(isset($_FILES['post_image']) and isset($_POST['post_text']))
-        
-        {
-    $author = Session::getUser()->getEmail();
-        $image_name = md5($author.time()) . ".jpg";
+        if(is_file($image_tmp) and exif_imagetype($image_tmp) !== false){
+        $author = Session::getUser()->getEmail();
+        $image_name = md5($author.time()) . image_type_to_extension(exif_imagetype($image_tmp));
         $image_path = get_config('upload_path') . $image_name;
        if( move_uploaded_file($image_tmp, $image_path)){
-        
-        $insert_command = "INSERT INTO `post` (`post_text`, `image_url`, `like_count`, `uploaded_time`, `owner`)
-        VALUES ('$text', 'https://stock.adobe.com/in/search?k=happy+birthday+cat', '0', now(), '$author')";
+        $image_url = "/images/$image_path";
+        $insert_command = "INSERT INTO `post` (`post_text`,`multiple_images`,`image_url`, `like_count`, `uploaded_time`, `owner`)
+        VALUES ('$text', `0`, '$image_url', '0', now(), '$author')";
         $db = Database::getConnection();
         if($db->query($insert_command)){
             $id = mysqli_insert_id($db);
