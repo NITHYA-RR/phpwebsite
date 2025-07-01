@@ -18,28 +18,68 @@ class API extends REST
     */
     public function processApi()
     {
-        $request = strtolower(trim($_REQUEST['rquest'])); //TODO: Check for IDOR here.
-        // print $request; 
-        $func = basename($request);
-        if (!isset($_GET['namespace']) and (int)method_exists($this, $func) > 0) {
-            $this->$func();
-        } else {
-            if (isset($_GET['namespace'])) {
-                $dir = $_SERVER['DOCUMENT_ROOT'] . '/libs/api/' . $_GET['namespace'];
+        $func = strtolower(trim($_REQUEST['rquest'] ?? ''));
 
-                $file = $dir . '/' . $request . '.php';
-                if (file_exists($file)) {
-                    include $file;
-                    $this->current_call = Closure::bind(${$func}, $this, get_class());
-                    $this->$func(); //dynamically calling the function
+        if (method_exists($this, $func)) {
+            $this->$func();
+            return;
+        }
+
+        if (isset($_GET['namespace'])) {
+            $namespace = trim($_GET['namespace'], '/');
+            $file = __DIR__ . "/libs/api/$func.php";
+
+            if (file_exists($file)) {
+                include $file;
+
+                if (isset(${$func}) && is_callable(${$func})) {
+                    $this->current_call = Closure::bind(${$func}, $this, get_class($this));
+                    call_user_func($this->current_call);
                 } else {
-                    $this->response($this->json(['error' => 'method_not_found']), 404);
+                    $this->response($this->json(['error' => 'function_not_found']), 500);
                 }
             } else {
-                //we can even process functions without namespace here.
-                $this->response($this->json(['error' => 'method_not_found']), 404);
+                $this->response($this->json(['error' => 'file_not_found']), 404);
             }
+        } else {
+            $this->response($this->json(['error' => 'namespace_missing']), 400);
         }
+    }
+
+
+    // public function processApi()
+    // {
+    //     $request = strtolower(trim($_REQUEST['rquest'])); //TODO: Check for IDOR here.
+    //     // print $request; 
+    //     $func = basename($request);
+    //     if (!isset($_GET['namespace']) and (int)method_exists($this, $func) > 0) {
+    //         $this->$func();
+    //     } else {
+    //         if (isset($_GET['namespace'])) {
+    //             $dir = $_SERVER['DOCUMENT_ROOT'] . '/api' . $_GET['namespace'];
+
+    //             $file = $dir . '/' . $request . '.php';
+    //             if (file_exists($file)) {
+    //                 include $file;
+    //                 $this->current_call = Closure::bind(${$func}, $this, get_class());
+    //                 $this->$func(); //dynamically calling the function
+    //             } else {
+    //                 $this->response($this->json(['error' => 'method_not_found']), 404);
+    //             }
+    //         } else {
+    //             //we can even process functions without namespace here.
+    //             $this->response($this->json(['error' => 'method_not_found']), 404);
+    //         }
+    //     }
+    // }
+
+    public function testjson()
+    {
+        $data = [
+            "success" => true,
+            "message" => "Hello from test"
+        ];
+        $this->response($this->json($data), 200);
     }
 
     public function isAuthenticated()
